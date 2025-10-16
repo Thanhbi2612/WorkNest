@@ -1,0 +1,71 @@
+/* Custom Toast Styles */
+.Toastify__toast-container {
+    z-index: 99999 !important;
+}
+
+.Toastify__toast {
+    border-radius: 12px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4) !important;
+    backdrop-filter: blur(10px);
+    font-family: inherit !important;
+}
+
+.Toastify__toast--dark {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%) !important;
+    border: 1px solid rgba(75, 85, 99, 0.4) !important;
+}
+
+.Toastify__toast--success {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%) !important;
+    border: 1px solid rgba(16, 185, 129, 0.4) !important;
+}
+
+.Toastify__toast--error {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(239, 68, 68, 0.05) 100%) !important;
+    border: 1px solid rgba(239, 68, 68, 0.4) !important;
+}
+
+.Toastify__toast--warning {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0.05) 100%) !important;
+    border: 1px solid rgba(245, 158, 11, 0.4) !important;
+}
+
+.Toastify__toast--info {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0.05) 100%) !important;
+    border: 1px solid rgba(59, 130, 246, 0.4) !important;
+}
+
+.Toastify__toast-body {
+    color: #f9fafb !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+}
+
+.Toastify__progress-bar {
+    height: 3px !important;
+}
+
+.Toastify__progress-bar--success {
+    background: linear-gradient(90deg, #10b981 0%, #059669 100%) !important;
+}
+
+.Toastify__progress-bar--error {
+    background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%) !important;
+}
+
+.Toastify__progress-bar--warning {
+    background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%) !important;
+}
+
+.Toastify__progress-bar--info {
+    background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%) !important;
+}
+
+.Toastify__close-button {
+    opacity: 0.7 !important;
+    color: #d1d5db !important;
+}
+
+.Toastify__close-button:hover {
+    opacity: 1 !important;
+}

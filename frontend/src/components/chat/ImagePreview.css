@@ -1,0 +1,124 @@
+/* ================================================
+   IMAGE PREVIEW STYLES
+   ================================================ */
+
+.image-preview-container {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: #f9fafb;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.image-preview-list {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.image-preview-item {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    border: 2px solid #e5e7eb;
+    transition: all 0.2s ease;
+}
+
+.image-preview-item:hover {
+    border-color: #3b82f6;
+    transform: scale(1.05);
+}
+
+.preview-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.remove-image-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: rgba(239, 68, 68, 0.9);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.remove-image-btn:hover {
+    background-color: #dc2626;
+    transform: scale(1.1);
+}
+
+.image-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    padding: 4px 6px;
+    display: flex;
+    flex-direction: column;
+    font-size: 10px;
+    color: white;
+}
+
+.image-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+}
+
+.image-size {
+    font-size: 9px;
+    opacity: 0.9;
+}
+
+/* Scrollbar styles */
+.image-preview-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.image-preview-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.image-preview-container::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+.image-preview-container::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Animation khi thêm ảnh */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.image-preview-item {
+    animation: fadeInScale 0.3s ease;
+}

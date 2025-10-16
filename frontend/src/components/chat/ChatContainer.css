@@ -1,0 +1,122 @@
+/* ================================================
+   CHAT CONTAINER - RESPONSIVE LAYOUT
+   ================================================ */
+
+.chat-container-main {
+    position: fixed;
+    top: 60px; /* Height của header */
+    left: 280px; /* Width của sidebar trái khi mở */
+    right: 0;
+    bottom: 0;
+    display: flex;
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-left: 2px solid var(--border-color, #e5e7eb);
+}
+
+[data-theme="dark"] .chat-container-main {
+    border-left-color: var(--border-color-dark, #374151);
+}
+
+/* Khi sidebar collapsed - áp dụng cho parent có class sidebar-collapsed */
+.main-content.sidebar-collapsed .chat-container-main {
+    left: 0;
+    border-left: none;
+}
+
+/* Toggle Button */
+.user-list-toggle-btn {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    z-index: 100;
+    padding: 0;
+}
+
+.user-list-toggle-btn:hover {
+    transform: scale(1.1);
+    background-color: #2563eb;
+}
+
+/* Chat Area - Responsive */
+.chat-area {
+    flex: 1;
+    width: 100%;
+    margin-right: 0;
+    transition: margin-right 0.3s ease;
+    padding: 0;
+    overflow: hidden;
+}
+
+.chat-area.sidebar-open {
+    margin-right: 320px; /* Width của UserListSidebar */
+}
+
+/* Empty State */
+.chat-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 1rem;
+}
+
+.chat-empty-state h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #9ca3af;
+    margin: 0;
+}
+
+.chat-empty-state p {
+    font-size: 1rem;
+    color: #6b7280;
+    margin: 0;
+    text-align: center;
+}
+
+/* Dark Mode */
+[data-theme="dark"] .chat-empty-state h2 {
+    color: #6b7280;
+}
+
+[data-theme="dark"] .chat-empty-state p {
+    color: #9ca3af;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .chat-area.sidebar-open {
+        margin-right: 280px;
+    }
+}
+
+@media (max-width: 768px) {
+    .chat-container-main {
+        left: 0; /* Ẩn sidebar trái trên mobile */
+        top: 56px;
+    }
+
+    .chat-area.sidebar-open {
+        margin-right: 0; /* Trên mobile, sidebar overlay thay vì đẩy */
+    }
+
+    .user-list-toggle-btn {
+        top: 70px;
+        right: 16px;
+        width: 44px;
+        height: 44px;
+    }
+}

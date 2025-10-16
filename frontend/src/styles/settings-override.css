@@ -1,0 +1,65 @@
+/* Settings Page - CSS Variables Override */
+
+/* Main container */
+.settings-container {
+  background: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Section cards */
+.settings-section {
+  background: var(--bg-secondary) !important;
+  border-color: var(--border-primary) !important;
+}
+
+.settings-section-header {
+  background: var(--bg-secondary) !important;
+  border-bottom-color: var(--border-primary) !important;
+}
+
+/* Text colors */
+.settings-title {
+  color: var(--text-primary) !important;
+}
+
+.settings-subtitle,
+.settings-description {
+  color: var(--text-tertiary) !important;
+}
+
+/* Buttons and controls */
+.settings-button {
+  background: var(--bg-tertiary) !important;
+  color: var(--text-secondary) !important;
+  border-color: var(--border-secondary) !important;
+}
+
+.settings-button:hover {
+  background: var(--border-secondary) !important;
+}
+
+/* Primary buttons with gradient */
+.settings-button-primary {
+  background: var(--gradient-primary) !important;
+  border-color: var(--primary) !important;
+}
+
+/* Toggle switches */
+.settings-toggle-wrapper {
+  background: var(--bg-secondary) !important;
+  border-bottom-color: var(--border-primary) !important;
+}
+
+/* Info card */
+.settings-info-card {
+  background: var(--primary-bg) !important;
+  border-color: var(--primary-border) !important;
+}
+
+.settings-info-title {
+  color: var(--primary) !important;
+}
+
+.settings-info-text {
+  color: var(--text-tertiary) !important;
+}

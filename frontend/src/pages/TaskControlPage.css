@@ -1,0 +1,301 @@
+.task-control-page {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.task-control-header {
+    margin-bottom: 30px;
+}
+
+.task-control-header h1 {
+    color: #1664d1;
+    margin: 0 0 10px 0;
+    font-size: 2rem;
+}
+
+.task-control-header p {
+    color: #6b7280;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.task-control-actions {
+    margin-bottom: 30px;
+}
+
+.create-task-btn {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.create-task-btn:hover {
+    background: #2563eb;
+}
+
+.create-task-section {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.task-management-section {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.task-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    border: 2px solid #e2e8f0;
+}
+
+.stat-card h3 {
+    margin: 0 0 10px 0;
+    color: #374151;
+    font-size: 1rem;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #3b82f6;
+    margin: 0;
+}
+
+.task-list-section h2 {
+    margin: 0 0 20px 0;
+    color: #1f2937;
+}
+
+.task-filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.filter-select {
+    padding: 8px 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    background: white;
+    min-width: 150px;
+    color: #1f2937 !important; /* Màu chữ tối cố định */
+}
+
+.filter-select option {
+    color: #1f2937 !important; /* Màu chữ tối cố định cho options */
+    background: white !important; /* Nền trắng cố định */
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+.task-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.task-list-header h2 {
+    margin: 0;
+}
+
+.refresh-btn {
+    padding: 8px 16px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.refresh-btn:hover {
+    background: #2563eb;
+}
+
+.task-list-loading {
+    text-align: center;
+    padding: 40px;
+    color: #6b7280;
+}
+
+.loading-spinner {
+    border: 4px solid #f3f4f6;
+    border-top: 4px solid #3b82f6;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.task-list-placeholder {
+    text-align: center;
+    padding: 40px;
+    color: #6b7280;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 2px dashed #e2e8f0;
+}
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.task-item-readonly {
+    background: white;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.2s;
+}
+
+.task-item-readonly:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.task-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    gap: 15px;
+}
+
+.task-item-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+    flex: 1;
+}
+
+.task-item-badges {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.task-badge {
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: white;
+}
+
+.task-item-description {
+    color: #4b5563;
+    margin: 0 0 16px 0;
+    line-height: 1.5;
+}
+
+.task-item-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.task-detail-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.detail-label {
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-weight: 500;
+    min-width: 120px;
+}
+
+.detail-value {
+    font-size: 0.875rem;
+    color: #1f2937;
+    font-weight: 500;
+}
+
+.task-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.task-tag {
+    background: #ddd6fe;
+    color: #6b21a8;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.access-denied {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.access-denied h2 {
+    color: #ef4444;
+    margin-bottom: 15px;
+}
+
+.access-denied p {
+    color: #6b7280;
+}
+
+@media (max-width: 768px) {
+    .task-control-page {
+        padding: 15px;
+    }
+
+    .task-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .task-filters {
+        flex-direction: column;
+    }
+
+    .filter-select {
+        min-width: unset;
+    }
+}

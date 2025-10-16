@@ -1,0 +1,208 @@
+.pagination-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
+}
+
+/* Light Mode (Default) */
+.pagination-container.light-mode {
+    border-top-color: #e5e7eb;
+}
+
+.pagination-container.light-mode .pagination-info {
+    text-align: center;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.pagination-container.light-mode .pagination-info strong {
+    color: #111827;
+    font-weight: 600;
+}
+
+.pagination-container.light-mode .pagination-info .total-items {
+    color: #9ca3af;
+    font-size: 0.8rem;
+}
+
+/* Dark Mode */
+.pagination-container.dark-mode {
+    border-top-color: #374151;
+}
+
+.pagination-container.dark-mode .pagination-info {
+    text-align: center;
+    font-size: 0.875rem;
+    color: #d1d5db;
+}
+
+.pagination-container.dark-mode .pagination-info strong {
+    color: #f9fafb;
+    font-weight: 600;
+}
+
+.pagination-container.dark-mode .pagination-info .total-items {
+    color: #9ca3af;
+    font-size: 0.8rem;
+}
+
+/* Fallback for old styles */
+.pagination-info {
+    text-align: center;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.pagination-info strong {
+    color: #111827;
+    font-weight: 600;
+}
+
+.pagination-info .total-items {
+    color: #9ca3af;
+    font-size: 0.8rem;
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.pagination-btn {
+    padding: 8px 16px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 80px;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+    color: #111827;
+}
+
+.pagination-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Dark Mode Buttons */
+.pagination-container.dark-mode .pagination-btn {
+    background: #374151;
+    border-color: #4b5563;
+    color: #d1d5db;
+}
+
+.pagination-container.dark-mode .pagination-btn:hover:not(:disabled) {
+    background: #4b5563;
+    border-color: #6b7280;
+    color: #f9fafb;
+}
+
+.pagination-numbers {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.pagination-number {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.pagination-number:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+    color: #111827;
+}
+
+.pagination-number.active {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: white;
+}
+
+/* Dark Mode Numbers */
+.pagination-container.dark-mode .pagination-number {
+    background: #374151;
+    border-color: #4b5563;
+    color: #d1d5db;
+}
+
+.pagination-container.dark-mode .pagination-number:hover {
+    background: #4b5563;
+    border-color: #6b7280;
+    color: #f9fafb;
+}
+
+.pagination-container.dark-mode .pagination-number.active {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: white;
+}
+
+.pagination-ellipsis {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9ca3af;
+    font-weight: 600;
+}
+
+.pagination-container.dark-mode .pagination-ellipsis {
+    color: #6b7280;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .pagination-controls {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .pagination-btn {
+        width: 100%;
+    }
+
+    .pagination-numbers {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .pagination-number {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+    }
+
+    .pagination-btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+}

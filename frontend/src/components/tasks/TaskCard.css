@@ -1,0 +1,528 @@
+.task-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e5e7eb;
+    transition: all 0.2s ease;
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.task-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: #d1d5db;
+    transform: translateY(-1px);
+}
+
+.task-card.overdue {
+    border-left: 4px solid #ef4444;
+    background: #fefefe;
+}
+
+.task-card-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.task-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+}
+
+.task-title-section {
+    margin-bottom: 16px;
+}
+
+.task-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #111827;
+    margin: 0 0 8px 0;
+    line-height: 1.5;
+}
+
+.project-badge {
+    background: #f3f4f6;
+    color: #4b5563;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 4px;
+}
+
+.task-badges {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.priority-badge,
+.status-badge,
+.report-badge {
+    color: white;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.report-badge {
+    background: #10b981 !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.task-description {
+    margin-bottom: 16px;
+    padding: 12px;
+    background: #f9fafb;
+    border-radius: 8px;
+    border-left: 3px solid #9ca3af;
+}
+
+.task-description p {
+    margin: 0;
+    color: #374151;
+    line-height: 1.6;
+    font-size: 0.9rem;
+}
+
+.task-details {
+    margin-bottom: 15px;
+}
+
+.task-dates {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.date-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px;
+    background: #f9fafb;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+}
+
+.date-label {
+    font-size: 0.7rem;
+    color: #6b7280;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.date-value {
+    font-size: 0.875rem;
+    color: #111827;
+    font-weight: 600;
+}
+
+.date-value.overdue-date {
+    color: #ef4444;
+    font-weight: 700;
+    animation: pulseText 2s infinite;
+}
+
+@keyframes pulseText {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.task-creator {
+    margin-bottom: 12px;
+    padding: 10px;
+    background: #f9fafb;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.creator-label {
+    font-size: 0.7rem;
+    color: #6b7280;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.creator-name {
+    font-size: 0.875rem;
+    color: #111827;
+    font-weight: 600;
+}
+
+/* Files styling */
+.task-files {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.files-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 8px;
+}
+
+.files-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.file-download-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #4b5563;
+    transition: all 0.2s;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+}
+
+.file-download-link:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+    color: #111827;
+}
+
+.file-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.file-name {
+    flex: 1;
+    font-size: 0.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+.file-size {
+    font-size: 0.7rem;
+    color: #9ca3af;
+    flex-shrink: 0;
+}
+
+.task-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.status-action-btn {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex: 1;
+}
+
+.status-action-btn:hover:not(:disabled) {
+    background: #2563eb;
+}
+
+.status-action-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.delete-btn {
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex: 1;
+}
+
+.delete-btn:hover:not(:disabled) {
+    background: #dc2626;
+    color: white;
+    border-color: #dc2626;
+}
+
+.delete-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.details-btn {
+    background: #f9fafb;
+    color: #4b5563;
+    border: 1px solid #e5e7eb;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex: 1;
+}
+
+.details-btn:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+    color: #111827;
+}
+
+.task-extended-details {
+    margin-top: 16px;
+    padding: 12px;
+    background: #f9fafb;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    padding: 8px;
+    background: white;
+    border-radius: 6px;
+}
+
+.detail-row:last-child {
+    margin-bottom: 0;
+}
+
+.detail-label {
+    font-size: 0.7rem;
+    color: #6b7280;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.detail-value {
+    font-size: 0.875rem;
+    color: #111827;
+    font-weight: 600;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .task-card {
+        padding: 15px;
+    }
+
+    .task-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .task-badges {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .task-dates {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .task-actions {
+        flex-direction: column;
+    }
+
+    .detail-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .task-card {
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+
+    .task-title {
+        font-size: 1rem;
+    }
+
+    .priority-badge,
+    .status-badge {
+        font-size: 0.75rem;
+        padding: 3px 8px;
+    }
+}
+
+/* Loading state */
+.task-card.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Animation for status changes */
+.task-card.status-updating {
+    transform: scale(0.98);
+    opacity: 0.8;
+}
+
+/* Special styling for urgent tasks */
+.task-card .priority-badge[style*="#ef4444"] {
+    animation: pulseBadge 2s infinite;
+}
+
+@keyframes pulseBadge {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* ================================================
+   CONFIRMED TASK STYLES
+   ================================================ */
+
+.task-card.task-confirmed {
+    opacity: 0.85;
+    border-left: 4px solid #10b981;
+    background: #f0fdf4;
+}
+
+.task-card.task-confirmed:hover {
+    opacity: 1;
+    transform: none;
+}
+
+.confirmed-banner {
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.confirmed-message {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.confirmed-icon {
+    font-size: 1.25rem;
+    animation: bounceIcon 1s ease infinite;
+}
+
+@keyframes bounceIcon {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.confirmed-text {
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.delete-confirmed-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.delete-confirmed-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+.delete-confirmed-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Responsive for confirmed banner */
+@media (max-width: 480px) {
+    .confirmed-banner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .delete-confirmed-btn {
+        width: 100%;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+}

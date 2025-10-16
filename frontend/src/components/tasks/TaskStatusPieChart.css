@@ -1,0 +1,77 @@
+.chart-container {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+}
+
+.chart-header {
+    margin-bottom: 20px;
+}
+
+.chart-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0 0 4px 0;
+}
+
+.chart-subtitle {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin: 0;
+}
+
+.no-data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    color: #9ca3af;
+}
+
+.no-data p {
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* Custom Tooltip */
+.custom-tooltip {
+    background: rgba(255, 255, 255, 0.96);
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tooltip-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0 0 8px 0;
+}
+
+.tooltip-value,
+.tooltip-percent {
+    font-size: 0.875rem;
+    color: #4b5563;
+    margin: 4px 0;
+}
+
+.tooltip-value strong,
+.tooltip-percent strong {
+    color: #1f2937;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .chart-container {
+        padding: 16px;
+    }
+
+    .chart-header h3 {
+        font-size: 1.1rem;
+    }
+}

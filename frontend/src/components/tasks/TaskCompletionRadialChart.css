@@ -1,0 +1,99 @@
+.radial-chart-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.radial-label {
+    font-family: inherit;
+}
+
+.radial-percentage {
+    font-size: 3rem;
+    font-weight: 700;
+    fill: #10b981;
+}
+
+.radial-subtitle {
+    font-size: 0.875rem;
+    font-weight: 500;
+    fill: #6b7280;
+}
+
+/* Completion Stats Section */
+.completion-stats {
+    display: flex;
+    justify-content: space-around;
+    gap: 16px;
+    padding: 20px;
+    background: #f9fafb;
+    border-radius: 8px;
+    margin-top: 16px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: #6b7280;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.stat-value.in-progress {
+    color: #3b82f6;
+}
+
+.stat-value.not-started {
+    color: #6b7280;
+}
+
+.stat-value.overdue {
+    color: #ef4444;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .radial-percentage {
+        font-size: 2.5rem;
+    }
+
+    .completion-stats {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .stat-item {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .stat-value {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .radial-percentage {
+        font-size: 2rem;
+    }
+
+    .radial-subtitle {
+        font-size: 0.75rem;
+    }
+
+    .completion-stats {
+        padding: 12px;
+    }
+}

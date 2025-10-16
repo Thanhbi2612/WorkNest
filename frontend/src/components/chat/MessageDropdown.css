@@ -1,0 +1,318 @@
+/* ================================================
+   MESSAGE DROPDOWN STYLES
+   ================================================ */
+
+.message-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    width: 380px;
+    max-height: 600px;
+    background: var(--card-background, #1f2937);
+    border: 1px solid var(--border-color, #374151);
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3),
+                0 10px 10px -5px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    z-index: 1000;
+    animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header */
+.message-dropdown-header {
+    padding: 16px 20px;
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.header-content h3 {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: white;
+}
+
+.header-content p {
+    margin: 4px 0 0 0;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.message-dropdown-actions {
+    margin-top: 12px;
+}
+
+.action-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-1px);
+}
+
+/* Content */
+.message-dropdown-content {
+    max-height: 450px;
+    overflow-y: auto;
+}
+
+.message-dropdown-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.message-dropdown-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.message-dropdown-content::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.3);
+    border-radius: 3px;
+}
+
+.message-dropdown-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 92, 246, 0.5);
+}
+
+/* Loading State */
+.message-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    color: var(--text-secondary, #9ca3af);
+}
+
+.loading-spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid rgba(139, 92, 246, 0.2);
+    border-top-color: #8b5cf6;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 12px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Empty State */
+.no-messages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.empty-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.no-messages h4 {
+    margin: 0 0 8px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary, #f3f4f6);
+}
+
+.no-messages p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--text-secondary, #9ca3af);
+}
+
+/* Messages List */
+.messages-list {
+    padding: 8px 0;
+}
+
+.message-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
+
+.message-item:hover {
+    background: rgba(139, 92, 246, 0.1);
+    border-left-color: #8b5cf6;
+}
+
+.message-item.unread {
+    background: rgba(139, 92, 246, 0.05);
+}
+
+.message-item.unread:hover {
+    background: rgba(139, 92, 246, 0.15);
+}
+
+/* Message Avatar */
+.message-avatar {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.avatar-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+    text-transform: uppercase;
+}
+
+.unread-indicator {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 12px;
+    height: 12px;
+    background: #ef4444;
+    border: 2px solid var(--card-background, #1f2937);
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+}
+
+/* Message Body */
+.message-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.message-sender {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--text-primary, #f3f4f6);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.message-preview {
+    font-size: 0.875rem;
+    color: var(--text-secondary, #9ca3af);
+    margin-bottom: 4px;
+}
+
+.message-time {
+    font-size: 0.75rem;
+    color: var(--text-tertiary, #6b7280);
+}
+
+/* Message Arrow */
+.message-arrow {
+    font-size: 1.25rem;
+    color: #8b5cf6;
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+.message-item:hover .message-arrow {
+    opacity: 1;
+    transform: translateX(4px);
+}
+
+/* Footer */
+.message-dropdown-footer {
+    padding: 12px 20px;
+    border-top: 1px solid var(--border-color, #374151);
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.view-all-btn {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid #8b5cf6;
+    color: #8b5cf6;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.view-all-btn:hover {
+    background: rgba(139, 92, 246, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+    .message-dropdown {
+        width: calc(100vw - 40px);
+        max-width: 380px;
+        right: -20px;
+    }
+}
+
+/* Light Mode Support */
+.theme-light .message-dropdown {
+    background: white;
+    border-color: #e5e7eb;
+}
+
+.theme-light .message-dropdown-header {
+    border-bottom-color: rgba(139, 92, 246, 0.2);
+}
+
+.theme-light .message-item:hover {
+    background: rgba(139, 92, 246, 0.08);
+}
+
+.theme-light .message-item.unread {
+    background: rgba(139, 92, 246, 0.04);
+}
+
+.theme-light .message-dropdown-footer {
+    border-top-color: #e5e7eb;
+    background: #f9fafb;
+}
+
+.theme-light .unread-indicator {
+    border-color: white;
+}
