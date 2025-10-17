@@ -171,6 +171,29 @@
   transform: scale(1.05) !important;
 }
 
+/* Chat Message Icon - Theme Adaptive */
+.chat-message-icon {
+  transition: filter 0.3s ease;
+}
+
+/* Dark theme - icon sáng lên */
+.theme-dark .chat-message-icon {
+  filter: brightness(0) invert(1) opacity(0.8);
+}
+
+.theme-dark .header-icon-btn:hover .chat-message-icon {
+  filter: brightness(0) invert(1) opacity(1);
+}
+
+/* Light theme - icon tối xuống */
+.theme-light .chat-message-icon {
+  filter: brightness(0) opacity(0.6);
+}
+
+.theme-light .header-icon-btn:hover .chat-message-icon {
+  filter: brightness(0) opacity(0.8);
+}
+
 .header-icon-btn:focus {
   outline: none;
   ring: 2px;

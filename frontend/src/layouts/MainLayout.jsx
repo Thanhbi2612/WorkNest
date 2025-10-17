@@ -173,7 +173,13 @@ const MainLayout = () => {
               style={{ position: 'relative' }}
             >
                Lịch
-              <Badge count={counts.byType.calendar} color="#3b82f6" size="sm" />
+              <Badge
+                count={counts.byType.calendar}
+                color="#3b82f6"
+                size="sm"
+                rightOffset="2px"
+                topOffset="2px"
+              />
             </Link>
           </li>
           <li>
@@ -191,7 +197,13 @@ const MainLayout = () => {
               style={{ position: 'relative' }}
             >
                Báo cáo
-              <Badge count={counts.byType.report} color="#8b5cf6" size="sm" />
+              <Badge
+                count={counts.byType.report}
+                color="#8b5cf6"
+                size="sm"
+                rightOffset="2px"
+                topOffset="2px"
+              />
             </Link>
           </li>
           <li>
@@ -229,10 +241,10 @@ const MainLayout = () => {
                 <img
                   src="/chat_message.png"
                   alt="Messages"
+                  className="chat-message-icon"
                   style={{
                     width: '30px',
-                    height: '30px',
-                    filter: messageCount > 0 ? 'none' : 'grayscale(50%) opacity(0.7)'
+                    height: '30px'
                   }}
                 />
                 {/* Badge hiển thị số lượng */}

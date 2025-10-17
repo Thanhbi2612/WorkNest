@@ -1,7 +1,6 @@
 const { User, UserAdmin } = require('../models');
 const { validateUserRegistration } = require('../utils/validation');
 const { asyncHandler, AppError } = require('../middleware');
-const bcrypt = require('bcrypt');
 const sharp = require('sharp');
 const path = require('path');
 const fs = require('fs');

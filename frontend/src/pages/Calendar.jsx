@@ -3,8 +3,6 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import '../styles/toastCustom.css';
 import { getEvents, createEvent, deleteEvent, updateEvent } from '../services/eventService';
 import EventDetailPopup from '../components/calendar/EventDetailPopup';
@@ -420,20 +418,6 @@ const Calendar = () => {
           onSave={handleSaveEvent}
           event={selectedEvent}
           selectedDate={selectedDate}
-        />
-
-        {/* Toast Notifications */}
-        <ToastContainer
-          position="top-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={true}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme={isDarkMode ? "dark" : "light"}
         />
       </div>
     </div>
