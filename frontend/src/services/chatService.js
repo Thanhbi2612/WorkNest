@@ -66,6 +66,24 @@ const chatService = {
     },
 
     /**
+     * Tạo hoặc lấy conversation với user cụ thể (alias)
+     * @param {Object} data - { participantId, participantType }
+     */
+    async createOrGetConversation(data) {
+        try {
+            const { participantId, participantType = 'user' } = data;
+            const response = await api.post('/chat/conversations/direct', {
+                targetUserId: participantId,
+                targetUserType: participantType
+            });
+            return response.data;
+        } catch (error) {
+            console.error('Error creating conversation:', error);
+            throw error;
+        }
+    },
+
+    /**
      * Lấy messages của một conversation (có phân trang)
      * @param {Number} conversationId
      * @param {Number} page - Default: 1

@@ -3,35 +3,59 @@ import api from './api';
 class AuthService {
     // Universal login method that auto-detects user type
     async universalLogin(identifier, password) {
+        // Strategy: Try user login first (since users are more common than admins)
+        // If user login fails and backend suggests trying admin, then try admin login
+
         try {
-            const response = await api.post('/auth/admin/login', {
+            // Try user login first
+            const userResponse = await api.post('/auth/user/login', {
                 identifier,
                 password,
             });
 
-            const data = response.data.data;
+            // User login successful
+            const data = userResponse.data.data;
             const tokens = data.tokens;
-
-            // Extract user data and determine user type
-            let user = null;
-            let userType = 'user';
-
-            if (data.admin) {
-                user = data.admin;
-                userType = 'admin';
-            } else if (data.user) {
-                user = data.user;
-                userType = 'user';
-            }
+            const user = data.user;
 
             // Store tokens and user info
             localStorage.setItem('accessToken', tokens.accessToken);
             localStorage.setItem('refreshToken', tokens.refreshToken);
-            localStorage.setItem('user', JSON.stringify({ ...user, userType }));
+            localStorage.setItem('user', JSON.stringify({ ...user, userType: 'user' }));
 
             return { success: true, user, tokens };
-        } catch (error) {
-            const message = error.response?.data?.message || 'Login failed';
+        } catch (userError) {
+            const userErrorData = userError.response?.data;
+
+            // If user login fails and backend suggests trying admin
+            if (userErrorData?.shouldTryAdmin) {
+                try {
+                    // Try admin login
+                    const adminResponse = await api.post('/auth/admin/login', {
+                        identifier,
+                        password,
+                    });
+
+                    // Admin login successful
+                    const data = adminResponse.data.data;
+                    const tokens = data.tokens;
+                    const admin = data.admin;
+
+                    // Store tokens and admin info
+                    localStorage.setItem('accessToken', tokens.accessToken);
+                    localStorage.setItem('refreshToken', tokens.refreshToken);
+                    localStorage.setItem('user', JSON.stringify({ ...admin, userType: 'admin' }));
+
+                    return { success: true, user: admin, tokens };
+                } catch (adminError) {
+                    // Admin login also failed
+                    const message = adminError.response?.data?.message || 'Login failed';
+                    return { success: false, message };
+                }
+            }
+
+            // User login failed and no suggestion to try admin (e.g., account deactivated, wrong password)
+            const message = userErrorData?.message || 'Login failed';
             return { success: false, message };
         }
     }

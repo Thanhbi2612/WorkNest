@@ -1,3 +1,4 @@
+
 # Dependencies
 node_modules/
 package-lock.json
@@ -36,13 +37,12 @@ backend/uploads/documents/*
 !backend/uploads/avatars/.gitkeep
 !backend/uploads/documents/.gitkeep
 
-# Database (SQLite only - PostgreSQL doesn't create files in project)
+# Database
 *.sqlite
 *.db
 
 # Editor directories and files
 .vscode/
-.cursor/
 .idea/
 .DS_Store
 *.suo

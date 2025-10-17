@@ -165,8 +165,9 @@ const NotificationBell = () => {
   };
 
   // Tính toán số lượng notifications sau khi filter
-  const filteredNotificationsCount = notifications.length;
-  // Không cộng events nữa vì đã có calendar notifications trong bảng notifications
+  // ✅ LOẠI BỎ message notifications (chỉ hiện task/calendar/report)
+  const nonMessageNotifications = notifications.filter(n => n.type !== 'message_new');
+  const filteredNotificationsCount = nonMessageNotifications.length;
   const totalCount = filteredNotificationsCount;
   const hasNotifications = totalCount > 0 && settings.notifications.enabled;
 
@@ -176,28 +177,10 @@ const NotificationBell = () => {
       <button
         onClick={() => setShowDropdown(!showDropdown)}
         style={{
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-          padding: '8px',
-          borderRadius: '12px',
-          transition: 'all 0.3s ease',
-          position: 'relative',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
           width: '40px',
           height: '40px'
         }}
         title={settings.notifications.enabled ? `${totalCount} thông báo chưa đọc` : 'Thông báo đã tắt'}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.background = '#374151';
-          e.currentTarget.style.transform = 'scale(1.05)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.background = 'none';
-          e.currentTarget.style.transform = 'scale(1)';
-        }}
       >
         <img
           src="/noti_bell.png"
@@ -235,7 +218,7 @@ const NotificationBell = () => {
       {/* Dropdown */}
       {showDropdown && (
         <NotificationDropdown
-          notifications={notifications}
+          notifications={nonMessageNotifications}
           events={events}
           loading={loading}
           onNotificationRead={handleNotificationRead}

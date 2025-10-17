@@ -469,7 +469,12 @@ exports.markAsRead = asyncHandler(async (req, res) => {
         throw new AppError('You do not have access to this conversation', 403);
     }
 
+    // Update conversation last_read_at
     await Conversation.updateLastRead(id, userId, userType);
+
+    // ✅ Đánh dấu message notifications là đã đọc
+    const Notification = require('../models/Notification');
+    await Notification.markConversationMessagesAsRead(userId, parseInt(id));
 
     res.status(200).json({
         success: true,

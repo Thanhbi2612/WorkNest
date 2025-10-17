@@ -20,7 +20,8 @@ const ChatWindow = ({
     socket,
     isConnected,
     onClose,
-    onlineUsers = []
+    onlineUsers = [],
+    isLoadingMessages = false
 }) => {
     const { user } = useAuth();
     const [messageInput, setMessageInput] = useState('');
@@ -43,21 +44,39 @@ const ChatWindow = ({
     const currentUserId = user?.id;
     const currentUserType = user?.userType || (user?.role === 'admin' ? 'admin' : 'user');
 
-    // Auto scroll to bottom CHỈ KHI có tin nhắn mới (không scroll khi edit/delete)
+    // Auto scroll to bottom khi có tin nhắn mới hoặc mở conversation
     useEffect(() => {
-        if (messageListRef.current) {
-            const currentLength = messages.length;
-            const prevLength = prevMessagesLengthRef.current;
+        console.log('🔍 Auto-scroll useEffect triggered:', {
+            isLoadingMessages,
+            messagesLength: messages.length,
+            hasRef: !!messageListRef.current,
+            conversationId: conversation?.id
+        });
 
-            // Chỉ scroll xuống khi có tin nhắn mới được thêm vào (length tăng)
-            if (currentLength > prevLength) {
-                messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
-            }
+        // CHỈ scroll khi:
+        // 1. Messages đã load xong (!isLoadingMessages)
+        // 2. Có messages để hiển thị
+        // 3. messageListRef đã được render
+        if (!isLoadingMessages && messageListRef.current && messages.length > 0) {
+            console.log('✅ Scrolling to bottom...');
+            // Dùng setTimeout để đảm bảo DOM đã render xong
+            const timeoutId = setTimeout(() => {
+                if (messageListRef.current) {
+                    const scrollHeight = messageListRef.current.scrollHeight;
+                    messageListRef.current.scrollTop = scrollHeight;
+                    console.log('📜 Scrolled to:', scrollHeight);
+                }
+            }, 100);
 
-            // Update prev length
-            prevMessagesLengthRef.current = currentLength;
+            return () => clearTimeout(timeoutId);
+        } else {
+            console.log('❌ Scroll blocked:', {
+                isLoadingMessages,
+                hasRef: !!messageListRef.current,
+                messagesLength: messages.length
+            });
         }
-    }, [messages]);
+    }, [messages, conversation?.id, isLoadingMessages]);
 
     // Listen for typing indicators and message updates
     useEffect(() => {
@@ -411,10 +430,10 @@ const ChatWindow = ({
                         console.error('Failed to send via socket:', response.message);
                         setMessages(prev => prev.filter(m => m.id !== tempMessage.id));
                         sendViaRestAPI(finalMessageText, messageType, fileUrl);
-                    } else {
-                        // Remove temp message, backend sẽ broadcast new_message
-                        setMessages(prev => prev.filter(m => m.id !== tempMessage.id));
                     }
+                    // Nếu success, KHÔNG xóa temp message
+                    // Backend sẽ broadcast new_message và ChatContainer sẽ thêm message thật
+                    // Temp message sẽ tự bị thay thế khi có message mới với ID khác
                 });
             } else {
                 // Fallback to REST API

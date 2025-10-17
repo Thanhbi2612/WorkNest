@@ -1,4 +1,4 @@
-
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 import TaskList from '../components/tasks/TaskList';
 
@@ -21,10 +21,14 @@ const TasksPage = () => {
         title = 'Nhiệm vụ quá hạn';
     }
 
+    // Lấy openTaskId từ navigation state
+    const openTaskId = location.state?.openTaskId;
+
     return (
         <TaskList
             filterType={filterType}
             title={title}
+            openTaskId={openTaskId}
         />
     );
 };

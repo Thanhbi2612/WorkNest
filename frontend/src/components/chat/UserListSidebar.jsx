@@ -89,6 +89,7 @@ const UserListSidebar = ({ isOpen, onClose, onUserClick, onlineUsers, setOnlineU
 
     // Check if user is online
     const isUserOnline = (userId, userType) => {
+        if (!onlineUsers || !Array.isArray(onlineUsers)) return false;
         return onlineUsers.some(u => u.userId === userId && u.userType === userType);
     };
 

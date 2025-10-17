@@ -70,6 +70,7 @@ const Dashboard = () => {
                 color: '#10b981',
                 path: '/tasks/completed',
 
+                
                 count: stats?.tasks?.completed || 0
             },
         ];

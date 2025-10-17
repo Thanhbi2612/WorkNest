@@ -3,6 +3,7 @@ const router = express.Router();
 
 const {
     adminLogin,
+    userLogin,
     refreshToken,
     logout,
     logoutAll,
@@ -58,6 +59,40 @@ const {
  *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.post('/admin/login', authLimiter, adminLogin);
+
+/**
+ * @swagger
+ * /api/auth/user/login:
+ *   post:
+ *     summary: User login
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/LoginRequest'
+ *     responses:
+ *       200:
+ *         description: Login successful
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/AuthResponse'
+ *       400:
+ *         description: Validation failed
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ *       401:
+ *         description: Invalid credentials
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/ErrorResponse'
+ */
+router.post('/user/login', authLimiter, userLogin);
 
 
 /**

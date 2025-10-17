@@ -6,7 +6,7 @@ import TaskCard from '../tasks/TaskCard';
 import Pagination from '../common/Pagination';
 import './TaskList.css';
 
-const TaskList = ({ filterType, title }) => {
+const TaskList = ({ filterType, title, openTaskId }) => {
     const { isAdmin } = useAuth();
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -180,6 +180,7 @@ const TaskList = ({ filterType, title }) => {
                                     onTaskDelete={isAdmin() ? handleTaskDelete : null}
                                     showActions={true}
                                     isCompleted={filterType === 'completed' && isAdmin()}
+                                    openTaskId={openTaskId}
                                 />
                             ))}
                         </div>

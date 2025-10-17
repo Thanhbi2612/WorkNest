@@ -3,7 +3,7 @@ const rateLimit = require('express-rate-limit');
 // General API rate limiting
 const generalLimiter = rateLimit({
     windowMs: 1 * 60 * 1000, // 1 minute
-    max: 100, // Limit each IP to 100 requests per windowMs
+    max: 500, // Limit each IP to 500 requests per windowMs
     message: {
         success: false,
         message: 'Too many requests from this IP, please try again after 1 minute',
@@ -17,7 +17,7 @@ const generalLimiter = rateLimit({
 // Strict rate limiting for authentication endpoints
 const authLimiter = rateLimit({
     windowMs: 1 * 60 * 1000, // 1 minute
-    max: 5, // Limit each IP to 5 login attempts per windowMs
+    max: process.env.NODE_ENV === 'development' ? 100 : 20, // 100 for dev, 20 for production
     message: {
         success: false,
         message: 'Too many authentication attempts from this IP, please try again after 1 minute',
@@ -32,7 +32,7 @@ const authLimiter = rateLimit({
 // Rate limiting for registration
 const registerLimiter = rateLimit({
     windowMs: 60 * 60 * 1000, // 1 hour
-    max: 3, // Limit each IP to 3 registration attempts per hour
+    max: 10, // Limit each IP to 10 registration attempts per hour
     message: {
         success: false,
         message: 'Too many registration attempts from this IP, please try again after 1 hour',
@@ -46,7 +46,7 @@ const registerLimiter = rateLimit({
 // Rate limiting for password reset
 const passwordResetLimiter = rateLimit({
     windowMs: 60 * 60 * 1000, // 1 hour
-    max: 3, // Limit each IP to 3 password reset attempts per hour
+    max: 10, // Limit each IP to 10 password reset attempts per hour
     message: {
         success: false,
         message: 'Too many password reset attempts from this IP, please try again after 1 hour',
@@ -60,7 +60,7 @@ const passwordResetLimiter = rateLimit({
 // Rate limiting for sensitive operations
 const strictLimiter = rateLimit({
     windowMs: 1 * 60 * 1000, // 1 minute
-    max: 30, // Limit each IP to 30 requests per windowMs
+    max: 100, // Limit each IP to 100 requests per windowMs
     message: {
         success: false,
         message: 'Too many requests for this operation, please try again after 1 minute',
@@ -74,7 +74,7 @@ const strictLimiter = rateLimit({
 // Rate limiting for file uploads
 const uploadLimiter = rateLimit({
     windowMs: 1 * 60 * 1000, // 1 minute
-    max: 20, // Limit each IP to 20 upload requests per windowMs
+    max: 50, // Limit each IP to 50 upload requests per windowMs
     message: {
         success: false,
         message: 'Too many upload attempts from this IP, please try again after 1 minute',

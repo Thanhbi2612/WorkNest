@@ -152,6 +152,33 @@
   gap: 16px;
 }
 
+/* Header Icon Button Styles - Shared for Chat, Notification, etc */
+.header-icon-btn {
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  padding: 8px !important;
+  border-radius: 12px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.header-icon-btn:hover {
+  background: var(--bg-tertiary) !important;
+  transform: scale(1.05) !important;
+}
+
+.header-icon-btn:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: var(--primary);
+  ring-offset: 2px;
+  ring-offset-color: var(--bg-secondary);
+}
+
 /* Notification Bell Styles */
 .header-right .notification-bell {
   position: relative;

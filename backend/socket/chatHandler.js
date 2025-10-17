@@ -164,25 +164,36 @@ const chatHandler = (io, socket) => {
                         const recipientId = recipient.participantId;
                         const recipientType = recipient.participantType;
 
-                        // Tạo notification
-                        await Notification.create({
-                            user_id: recipientId,
-                            conversation_id: conversationId,
-                            type: 'message_new',
-                            title: 'Tin nhắn mới',
-                            message: `${username} đã gửi cho bạn 1 tin nhắn`
-                        });
+                        // ✅ CHECK: Đã có notification chưa đọc từ conversation này chưa?
+                        const existingNotification = await Notification.findUnreadMessageNotification(
+                            recipientId,
+                            conversationId
+                        );
 
-                        // Emit notification event cho recipient
-                        io.to(`${recipientType}_${recipientId}`).emit('new_notification', {
-                            type: 'message_new',
-                            conversation_id: conversationId,
-                            sender_name: username,
-                            message: `${username} đã gửi cho bạn 1 tin nhắn`,
-                            created_at: new Date()
-                        });
+                        // ✅ CHỈ TẠO MỚI nếu chưa có notification chưa đọc
+                        if (!existingNotification) {
+                            // Tạo notification
+                            await Notification.create({
+                                user_id: recipientId,
+                                conversation_id: conversationId,
+                                type: 'message_new',
+                                title: 'Tin nhắn mới',
+                                message: `${username} đã gửi tin nhắn cho bạn`
+                            });
 
-                        console.log(`🔔 Notification sent to ${recipientType}_${recipientId}`);
+                            // Emit notification event cho recipient
+                            io.to(`${recipientType}_${recipientId}`).emit('new_notification', {
+                                type: 'message_new',
+                                conversation_id: conversationId,
+                                sender_name: username,
+                                message: `${username} đã gửi tin nhắn cho bạn`,
+                                created_at: new Date()
+                            });
+
+                            console.log(`🔔 Notification sent to ${recipientType}_${recipientId}`);
+                        } else {
+                            console.log(`ℹ️  Notification already exists for conversation ${conversationId}, skipping...`);
+                        }
                     }
                 }
             } catch (notifError) {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import './NotificationDropdown.css';
 
 const NotificationDropdown = ({
@@ -13,6 +14,7 @@ const NotificationDropdown = ({
     onClose
 }) => {
     const navigate = useNavigate();
+    const { isAdmin } = useAuth();
 
     const handleNotificationClick = (notification) => {
         // Đánh dấu đã đọc khi click
@@ -28,8 +30,19 @@ const NotificationDropdown = ({
             });
             onClose(); // Close dropdown
         } else if (notification.task_id) {
-            // TODO: Navigate to task detail
-            console.log('Navigate to task:', notification.task_id);
+            // Admin: Chỉ đánh dấu đã đọc, không navigate
+            if (isAdmin()) {
+                // Notification đã được mark as read ở trên, chỉ cần đóng dropdown
+                // Badge sẽ tự động cập nhật
+                return;
+            }
+
+            // User: Navigate to tasks page with task opened
+            let tasksPath = '/tasks/not-started'; // Default
+            navigate(tasksPath, {
+                state: { openTaskId: notification.task_id }
+            });
+            onClose(); // Close dropdown
         }
     };
 

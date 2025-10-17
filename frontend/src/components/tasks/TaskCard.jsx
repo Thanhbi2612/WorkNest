@@ -4,11 +4,29 @@ import { taskService } from '../../services/taskService';
 import ConfirmDialog from '../ConfirmDialog';
 import './TaskCard.css';
 
-const TaskCard = ({ task, onTaskUpdate, onTaskDelete, showActions = true, isCompleted = false }) => {
+const TaskCard = ({ task, onTaskUpdate, onTaskDelete, showActions = true, isCompleted = false, openTaskId }) => {
     const [loading, setLoading] = useState(false);
     const [showDetails, setShowDetails] = useState(false);
     const [showConfirmDelete, setShowConfirmDelete] = useState(false);
     const isConfirmed = task.is_confirmed === true;
+
+    // Auto-open task detail if this task matches openTaskId
+    useEffect(() => {
+        if (openTaskId && task.id === openTaskId) {
+            setShowDetails(true);
+
+            // Scroll to this task card
+            setTimeout(() => {
+                const element = document.getElementById(`task-card-${task.id}`);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 100);
+
+            // Clear navigation state after opening
+            window.history.replaceState({}, document.title);
+        }
+    }, [openTaskId, task.id]);
 
     const handleStatusChange = async (newStatus) => {
         if (loading) return;
@@ -173,7 +191,10 @@ const TaskCard = ({ task, onTaskUpdate, onTaskDelete, showActions = true, isComp
     };
 
     return (
-        <div className={`task-card ${isOverdue() ? 'overdue' : ''} ${isConfirmed ? 'task-confirmed' : ''}`}>
+        <div
+            id={`task-card-${task.id}`}
+            className={`task-card ${isOverdue() ? 'overdue' : ''} ${isConfirmed ? 'task-confirmed' : ''}`}
+        >
             <div className="task-card-header">
                 <div className="task-badges">
                     <span
@@ -282,6 +303,12 @@ const TaskCard = ({ task, onTaskUpdate, onTaskDelete, showActions = true, isComp
 
             {showActions && !isConfirmed && (
                 <div className="task-actions">
+                    <button
+                        className="details-toggle-btn"
+                        onClick={() => setShowDetails(!showDetails)}
+                    >
+                        {showDetails ? 'Ẩn chi tiết' : 'Xem chi tiết'}
+                    </button>
                     {getNextStatus() && (
                         <button
                             className="status-action-btn"

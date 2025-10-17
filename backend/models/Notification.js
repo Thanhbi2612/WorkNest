@@ -197,6 +197,46 @@ class Notification extends BaseModel {
         return this.getUnreadCount(userId);
     }
 
+    // Tìm notification message_new chưa đọc cho conversation cụ thể
+    async findUnreadMessageNotification(userId, conversationId) {
+        try {
+            const result = await query(`
+                SELECT *
+                FROM ${this.tableName}
+                WHERE user_id = $1
+                  AND conversation_id = $2
+                  AND type = 'message_new'
+                  AND is_read = false
+                LIMIT 1
+            `, [userId, conversationId]);
+
+            return result.rows[0] || null;
+        } catch (error) {
+            console.error('Error finding unread message notification:', error);
+            throw error;
+        }
+    }
+
+    // Đánh dấu tất cả message notifications của conversation là đã đọc
+    async markConversationMessagesAsRead(userId, conversationId) {
+        try {
+            const result = await query(`
+                UPDATE ${this.tableName}
+                SET is_read = true
+                WHERE user_id = $1
+                  AND conversation_id = $2
+                  AND type = 'message_new'
+                  AND is_read = false
+                RETURNING id
+            `, [userId, conversationId]);
+
+            return { updated_count: result.rows.length };
+        } catch (error) {
+            console.error('Error marking conversation messages as read:', error);
+            throw error;
+        }
+    }
+
     // Đếm số notification chưa đọc theo category (task, calendar, report)
     async getUnreadCountByCategory(userId) {
         try {

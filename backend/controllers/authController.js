@@ -3,8 +3,8 @@ const { generateTokenPair, verifyRefreshToken } = require('../utils/jwt');
 const { validateLogin } = require('../utils/validation');
 const { asyncHandler, AppError } = require('../middleware');
 
-// Universal Login - Automatically detects admin or user
-const universalLogin = asyncHandler(async (req, res) => {
+// Admin Login - Only checks admin table
+const adminLogin = asyncHandler(async (req, res) => {
     const { identifier, password } = req.body;
 
     // Validate input
@@ -17,25 +17,12 @@ const universalLogin = asyncHandler(async (req, res) => {
         });
     }
 
-    // Try to authenticate as admin first
-    let authResult = await UserAdmin.authenticate(identifier, password);
-    let userType = 'admin';
-    let userData = null;
-
-    if (authResult.success) {
-        userData = authResult.admin;
-    } else {
-        // If admin auth fails, try user authentication
-        authResult = await User.authenticate(identifier, password);
-        userType = 'user';
-        if (authResult.success) {
-            userData = authResult.user;
-        }
-    }
+    // Try to authenticate as admin
+    const authResult = await UserAdmin.authenticate(identifier, password);
 
     if (!authResult.success) {
         // Check if account is deactivated
-        if (authResult.message === 'User account is disabled' || authResult.message === 'Admin account is disabled') {
+        if (authResult.message === 'Admin account is disabled') {
             return res.status(403).json({
                 success: false,
                 message: 'Tài khoản đã bị vô hiệu hóa. Vui lòng liên hệ với admin để được hỗ trợ.',
@@ -43,11 +30,76 @@ const universalLogin = asyncHandler(async (req, res) => {
             });
         }
 
+        // Return specific error to help frontend determine if should try user login
         return res.status(401).json({
             success: false,
-            message: 'Sai tên đăng nhập hoặc mật khẩu'
+            message: 'Sai tên đăng nhập hoặc mật khẩu',
+            error: 'ADMIN_AUTH_FAILED',
+            shouldTryUser: true // Hint for frontend to try user login
         });
     }
+
+    const adminData = authResult.admin;
+
+    // Generate tokens
+    const tokens = generateTokenPair(adminData);
+
+    // Save refresh token to database
+    const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
+    await RefreshToken.createRefreshToken({
+        user_id: adminData.id,
+        token: tokens.refreshToken,
+        user_type: 'admin',
+        expires_at: expiresAt
+    });
+
+    res.status(200).json({
+        success: true,
+        message: 'Admin login successful',
+        data: {
+            admin: adminData,
+            tokens
+        }
+    });
+});
+
+// User Login - Only checks user table
+const userLogin = asyncHandler(async (req, res) => {
+    const { identifier, password } = req.body;
+
+    // Validate input
+    const validation = validateLogin({ identifier, password });
+    if (!validation.isValid) {
+        return res.status(400).json({
+            success: false,
+            message: 'Validation failed',
+            errors: validation.errors
+        });
+    }
+
+    // Try to authenticate as user
+    const authResult = await User.authenticate(identifier, password);
+
+    if (!authResult.success) {
+        // Check if account is deactivated
+        if (authResult.message === 'User account is disabled') {
+            return res.status(403).json({
+                success: false,
+                message: 'Tài khoản đã bị vô hiệu hóa. Vui lòng liên hệ với admin để được hỗ trợ.',
+                error: 'ACCOUNT_DEACTIVATED'
+            });
+        }
+
+        // Return specific error to help frontend determine if should try admin login
+        return res.status(401).json({
+            success: false,
+            message: 'Sai tên đăng nhập hoặc mật khẩu',
+            error: 'USER_AUTH_FAILED',
+            shouldTryAdmin: true // Hint for frontend to try admin login
+        });
+    }
+
+    const userData = authResult.user;
 
     // Generate tokens
     const tokens = generateTokenPair(userData);
@@ -57,23 +109,18 @@ const universalLogin = asyncHandler(async (req, res) => {
     await RefreshToken.createRefreshToken({
         user_id: userData.id,
         token: tokens.refreshToken,
-        user_type: userType,
+        user_type: 'user',
         expires_at: expiresAt
     });
 
     res.status(200).json({
         success: true,
-        message: `${userType.charAt(0).toUpperCase() + userType.slice(1)} login successful`,
+        message: 'User login successful',
         data: {
-            [userType]: userData,
+            user: userData,
             tokens
         }
     });
-});
-
-// Admin Login (kept for backward compatibility)
-const adminLogin = asyncHandler(async (req, res) => {
-    return universalLogin(req, res);
 });
 
 
@@ -371,6 +418,7 @@ const googleLogin = asyncHandler(async (req, res) => {
 
 module.exports = {
     adminLogin,
+    userLogin,
     refreshToken,
     logout,
     logoutAll,
