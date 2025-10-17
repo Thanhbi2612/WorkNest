@@ -136,7 +136,7 @@ Cách nhanh nhất để chạy project - chỉ cần Docker!
 ```bash
 # Clone repository
 git clone <repository-url>
-cd task-management
+cd WorkNest
 
 # Copy .env.example thành .env
 cp .env.example .env
