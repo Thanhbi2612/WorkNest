@@ -19,7 +19,7 @@ docker-compose --version
 
 ```bash
 git clone <repository-url>
-cd task-management
+cd WorkNest
 ```
 
 ### Bước 2: Cấu hình environment variables
@@ -27,16 +27,23 @@ cd task-management
 ```bash
 # Copy file .env.example thành .env
 cp .env.example .env
-
-# Mở file .env và điền thông tin:
-# - Database password
-# - JWT secret (generate bằng: openssl rand -base64 32)
-# - Google OAuth credentials (nếu dùng)
 ```
 
-Tối thiểu cần thay đổi:
-- POSTGRES_PASSWORD (để secure database)
-- JWT_SECRET (tạo random string dài)
+**Để test nhanh:** File `.env.example` đã có sẵn giá trị mặc định, bạn có thể dùng luôn mà không cần sửa gì!
+
+**Các giá trị trong .env:**
+
+✅ **Sử dụng được ngay:**
+- `POSTGRES_PASSWORD=postgres123` - Password database cho development
+- `JWT_SECRET=dev-secret-key...` - Secret key cho JWT tokens
+
+⚠️ **TÙY CHỌN - Có thể bỏ qua:**
+- `GOOGLE_CLIENT_ID` và `GOOGLE_CLIENT_SECRET` - Chỉ cần nếu muốn test tính năng "Login with Google". Nếu bỏ qua, vẫn login được bằng username/password bình thường.
+
+**Lưu ý bảo mật:**
+- Các giá trị mặc định CHỈ dùng cho development/test local
+- Nếu deploy production, BẮT BUỘC phải đổi `POSTGRES_PASSWORD` và `JWT_SECRET`
+- Để tạo JWT_SECRET an toàn: `openssl rand -base64 32`
 
 ### Bước 3: Khởi động services
 
