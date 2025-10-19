@@ -216,6 +216,7 @@ export const SettingsProvider = ({ children }) => {
 
     const value = {
         settings,
+        isDarkMode: settings.appearance.mode === 'dark',
         toggleNotifications,
         toggleNotificationType,
         resetSettings,
