@@ -5,7 +5,7 @@
   -- Admin account (password: Password123)
   INSERT INTO user_admin (username, email, password_hash, role, is_active, created_at, updated_at)
   VALUES
-  ('thanh1212', 'admin@test.com', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyYmXjIHPWq6', 'admin', true, NOW(), NOW());
+  ('thanh1212', 'admin@test.com', '$2b$12$rmGs/N7HscNOIloVPKOts.k1S2keu0w1sdn6uElLDK3JNgQsvXmvG', 'admin', true, NOW(), NOW());
 
   -- Regular users (password: password123)
   INSERT INTO users (username, email, first_name, last_name, password_hash, is_active, created_at, updated_at)
