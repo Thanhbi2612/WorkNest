@@ -10,8 +10,8 @@
   -- Regular users (password: password123)
   INSERT INTO users (username, email, first_name, last_name, password_hash, is_active, created_at, updated_at)
   VALUES
-  ('john', 'john@test.com', 'John', 'Doe', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyYmXjIHPWq6', true, NOW(), NOW()),
-  ('jane', 'jane@test.com', 'Jane', 'Smith', '$2a$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewY5GyYmXjIHPWq6', true, NOW(), NOW());
+  ('john', 'john@test.com', 'John', 'Doe', '$2b$12$YlW5g3MnXDtVgkbvIwJWsOycSjgENidXpg.nG6NQc93hoQP/ag6Fi', true, NOW(), NOW()),
+  ('jane', 'jane@test.com', 'Jane', 'Smith', '$2b$12$YlW5g3MnXDtVgkbvIwJWsOycSjgENidXpg.nG6NQc93hoQP/ag6Fi', true, NOW(), NOW());
 
   -- Sample project
   INSERT INTO projects (name, description, status, created_by, created_at, updated_at)
