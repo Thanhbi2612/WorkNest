@@ -52,6 +52,11 @@ const corsOptions = {
             allowedOrigins.push(process.env.FRONTEND_URL);
         }
 
+        // Allow all Vercel deployment URLs for this project
+        if (process.env.NODE_ENV === 'production' && origin && origin.includes('vercel.app')) {
+            allowedOrigins.push(origin);
+        }
+
         if (allowedOrigins.indexOf(origin) !== -1) {
             callback(null, true);
         } else {
