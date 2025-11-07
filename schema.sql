@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict muFErj2peJ5FHEqZseVEDvgQ2MRaQ5Ar0fSS7CMUBHNYdEW3VKb6HhMAjvYqAmz
+-- \restrict muFErj2peJ5FHEqZseVEDvgQ2MRaQ5Ar0fSS7CMUBHNYdEW3VKb6HhMAjvYqAmz (commented out for deployment)
 
 -- Dumped from database version 17.6
 -- Dumped by pg_dump version 17.6
