@@ -47,9 +47,9 @@ const corsOptions = {
             'http://127.0.0.1:5173'
         ];
 
-        // In production, add your actual domain
-        if (process.env.NODE_ENV === 'production') {
-            allowedOrigins.push('https://yourdomain.com');
+        // In production, add frontend URL from environment variable
+        if (process.env.FRONTEND_URL) {
+            allowedOrigins.push(process.env.FRONTEND_URL);
         }
 
         if (allowedOrigins.indexOf(origin) !== -1) {
