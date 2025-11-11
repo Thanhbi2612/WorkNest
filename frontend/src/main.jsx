@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import { GoogleOAuthProvider } from '@react-oauth/google'
+import { Analytics } from '@vercel/analytics/react'
 import { AuthProvider } from './context/AuthContext'
 import { SettingsProvider } from './context/SettingsContext'
 import { SocketProvider } from './context/SocketContext'
@@ -48,6 +49,7 @@ createRoot(document.getElementById('root')).render(
                   },
                 }}
               />
+              <Analytics />
             </ThemeProvider>
           </SettingsProvider>
           </ChatProvider>
